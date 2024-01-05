@@ -1,0 +1,16 @@
+<div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <!-- Repeat this block for each product -->
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden" *ngFor="let product of products">
+      <img [src]="product.imageUrl" [alt]="product.name" class="w-full h-64 object-cover">
+      <div class="p-4">
+        <h3 class="text-xl font-semibold">{{ product.name }}</h3>
+        <p class="text-gray-500 mt-2">{{ product.description }}</p>
+        <div class="flex justify-between items-center mt-4">
+          <span class="text-green-600 text-lg font-semibold">${{ product.price }}</span>
+          <button class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
