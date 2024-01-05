@@ -4,19 +4,21 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { ProductComponent } from './product/product.component';
+import {NavbarComponent} from "./navbar/navbar.component";
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProductComponent
-    // Voeg andere componenten die je hebt gemaakt hier toe
-  ],
+    ProductComponent,
+    NavbarComponent ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
-    // Voeg andere Angular modules die je gebruikt hier toe
+    HttpClientModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent] // Zorg ervoor dat AppComponent hier staat
