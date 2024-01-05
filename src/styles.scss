@@ -8,3 +8,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 body {
   background-color: ghostwhite; /* Your desired color */
 }
+
+/* Add this to your global CSS file */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}

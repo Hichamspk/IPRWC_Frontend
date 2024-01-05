@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ProductComponent } from './product/product.component';
 import {NavbarComponent} from "./navbar/navbar.component";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {FormsModule} from "@angular/forms";
 
 
 
@@ -15,6 +16,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ProductComponent,
     NavbarComponent ],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,

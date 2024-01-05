@@ -21,7 +21,7 @@ export class NavbarComponent {
     this.links = [
       { title: 'Home', path: '/home', icon: this.faHome },
       { title: 'Login', path: '/login', icon: this.faSignInAlt },
-      { title: 'Category', path: '/category', icon: this.faList },
+      { title: 'Category.ts', path: '/category', icon: this.faList },
       { title: 'About', path: '/about', icon: this.faInfoCircle }
     ];
 

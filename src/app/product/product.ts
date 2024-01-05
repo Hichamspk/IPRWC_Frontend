@@ -1,10 +1,10 @@
+import {Category} from "./Category";
+
 export interface Product {
-  id : number;
-  name : string;
-  category: string;
+  id: number;
+  name: string;
+  category: Category;
   description: string;
   price: number;
-  stock: number;
   imageUrl: string;
-  createdAt: string;
 }

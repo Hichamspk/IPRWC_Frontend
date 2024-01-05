@@ -2,7 +2,8 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { Product } from "./product";
-import {environment} from "../environment/environment"; // Zorg ervoor dat dit pad klopt
+import { Category } from "./Category";
+import { environment } from "../environment/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,9 @@ export class ProductService {
 
   public getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(`${this.apiServerUrl}/products`);
+  }
 
-
+  public getCategories(): Observable<Category[]> {
+    return this.http.get<Category[]>(`${this.apiServerUrl}/category`);
   }
 }
