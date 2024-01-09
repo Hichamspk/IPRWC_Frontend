@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from './product.service';
-import { Product } from './product';
+import { ProductService } from '../service/product.service';
+import { ProductModel } from '../model/product.model';
 import { Category } from "./Category";
 
 @Component({
@@ -9,11 +9,10 @@ import { Category } from "./Category";
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
-  products: Product[] = [];
-  filteredProducts: Product[] = [];
+  products: ProductModel[] = [];
+  filteredProducts: ProductModel[] = [];
   categories: Category[] = [];
-  dropdownOpen: boolean = false;
-  selectedCategories: number[] = []; // For tracking selected categories
+  selectedCategories: number[] = [];
 
   constructor(private productService: ProductService) {}
 
@@ -29,10 +28,8 @@ export class ProductComponent implements OnInit {
 
   onCategoryChange(categoryId: number, isChecked: boolean): void {
     if (isChecked) {
-      // Add category to selected categories
       this.selectedCategories.push(categoryId);
     } else {
-      // Remove category from selected categories
       const index = this.selectedCategories.indexOf(categoryId);
       if (index > -1) {
         this.selectedCategories.splice(index, 1);
@@ -43,11 +40,9 @@ export class ProductComponent implements OnInit {
 
   applyFilter(): void {
     if (this.selectedCategories.length > 0) {
-      // Filter products based on selected categories
       this.filteredProducts = this.products.filter(product =>
         this.selectedCategories.includes(product.category.id));
     } else {
-      // If no categories are selected, show all products
       this.filteredProducts = this.products;
     }
   }

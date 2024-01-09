@@ -6,7 +6,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { ProductComponent } from './product/product.component';
 import {NavbarComponent} from "./navbar/navbar.component";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {LoginComponent} from "./login/login.component";
+import {ProfilePageComponent} from "./profile-page/profile-page.component";
 
 
 
@@ -14,16 +16,19 @@ import {FormsModule} from "@angular/forms";
   declarations: [
     AppComponent,
     ProductComponent,
-    NavbarComponent ],
+    NavbarComponent,
+    ProfilePageComponent,
+  LoginComponent],
   imports: [
     FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FontAwesomeModule
   ],
   providers: [],
-  bootstrap: [AppComponent] // Zorg ervoor dat AppComponent hier staat
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
 

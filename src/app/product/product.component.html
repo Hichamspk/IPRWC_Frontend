@@ -1,37 +1,26 @@
-<div class="container mx-auto px-4 sm:px-6 lg:px-8 mt-20">
-  <div class="lg:grid lg:grid-cols-5 gap-6">
-
-    <!-- Category Filter with Checkboxes (Large Screens) -->
-    <div class="hidden lg:flex lg:flex-col lg:col-span-1">
-      <ul class="list-none pl-0">
-        <li *ngFor="let category of categories" class="mb-2">
-          <input type="checkbox" id="lg-category-{{category.id}}" #lgCheckbox (change)="onCategoryChange(category.id, lgCheckbox.checked)">
-          <label for="lg-category-{{category.id}}">{{ category.name }}</label>
-        </li>
-      </ul>
-    </div>
-
-    <!-- Category Filter with Checkboxes (Small Screens) -->
-    <div class="lg:hidden flex flex-col pl-0">
-      <ul class="list-none">
-        <li *ngFor="let category of categories" class="mb-2">
-          <input type="checkbox" id="sm-category-{{category.id}}" #smCheckbox (change)="onCategoryChange(category.id, smCheckbox.checked)">
-          <label for="sm-category-{{category.id}}">{{ category.name }}</label>
-        </li>
-      </ul>
-    </div>
-
-    <!-- Main content area for Product Display -->
+<div class="bg-gray-50 dark:bg-gray-900 min-h-screen"> <
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 mt-20">
+    <div class="lg:grid lg:grid-cols-5 gap-6">
+      <div class="flex flex-col pl-0 w-full lg:col-span-1">
+        <ul class="list-none pl-0">
+          <li *ngFor="let category of categories" class="mb-2">
+            <input type="checkbox" id="category-{{category.id}}" #categoryCheckbox (change)="onCategoryChange(category.id, categoryCheckbox.checked)" class="text-primary-600 rounded border-gray-300">
+            <!-- Ensure label is visible -->
+            <label for="category-{{category.id}}" class="ml-2 text-sm font-medium text-gray-900 dark:text-white">{{ category.name }}</label>
+          </li>
+        </ul>
+      </div>
     <div class="col-span-4 lg:col-start-2">
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        <div *ngFor="let product of filteredProducts" class="bg-white shadow-md rounded-lg overflow-hidden flex flex-col">
+        <!-- Product Card -->
+        <div *ngFor="let product of filteredProducts" class="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden flex flex-col">
           <div class="aspect-w-1 aspect-h-1">
             <img [src]="product.imageUrl" [alt]="product.name" class="object-cover object-center flex-grow">
           </div>
           <div class="p-4">
-            <h3 class="text-xl font-semibold">{{ product.name }}</h3>
-            <p class="text-gray-800 mt-2">{{ product.description }}</p>
-            <span class="text-lg font-semibold">${{ product.price }}</span>
+            <h3 class="text-xl font-semibold dark:text-white">{{ product.name }}</h3>
+            <p class="text-gray-800 dark:text-gray-400 mt-2">{{ product.description }}</p>
+            <span class="text-lg font-semibold dark:text-white">${{ product.price }}</span>
           </div>
           <div class="p-2 mt-auto">
             <button class="w-full px-2 py-1 bg-black text-white rounded-md hover:bg-blue-950 transition duration-300 ease-in-out">Add to Cart</button>
@@ -40,4 +29,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>
