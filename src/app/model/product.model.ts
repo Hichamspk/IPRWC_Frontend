@@ -1,6 +1,6 @@
-import {Category} from "./Category";
+import {Category} from "../product/Category";
 
-export interface Product {
+export interface ProductModel {
   id: number;
   name: string;
   category: Category;
