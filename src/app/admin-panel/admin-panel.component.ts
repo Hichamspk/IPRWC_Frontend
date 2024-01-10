@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProductService } from '../service/product.service';
 import { ProductModel } from '../model/product.model';
+import {Category} from "../product/Category";
+import {CategoryService} from "../service/category-service";
 
 @Component({
   selector: 'app-admin-panel',
@@ -9,6 +11,7 @@ import { ProductModel } from '../model/product.model';
   styleUrls: ['./admin-panel.component.scss']
 })
 export class AdminPanelComponent implements OnInit {
+  categoryForm!: FormGroup;
   products: ProductModel[] = [];
   selectedProduct: ProductModel | null = null;
   productForm!: FormGroup;
@@ -16,12 +19,15 @@ export class AdminPanelComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private formBuilder: FormBuilder
-  ) {}
+    private formBuilder: FormBuilder,
+    private categoryService: CategoryService,
+
+) {}
 
   ngOnInit(): void {
     this.loadProducts();
     this.initializeForm();
+    this.initializeCategoryForm();
   }
 
   initializeForm(): void {
@@ -30,6 +36,12 @@ export class AdminPanelComponent implements OnInit {
       description: [''],
       price: [null, Validators.required],
       imageUrl: [''],
+    });
+  }
+
+  initializeCategoryForm(): void {
+    this.categoryForm = this.formBuilder.group({
+      name: ['', Validators.required]
     });
   }
 
@@ -86,6 +98,24 @@ export class AdminPanelComponent implements OnInit {
     this.productService.deleteProduct(id).subscribe(
       () => this.loadProducts(),
       (error) => console.error(error)
+    );
+  }
+
+  onAddCategory(): void {
+    if (this.categoryForm.invalid) {
+      return;
+    }
+    const newCategory: Category = this.categoryForm.value;
+    this.categoryService.addCategory(newCategory).subscribe(
+      (category) => {
+        // Handle the response, e.g., refresh the list of categories or show a success message
+        console.log('Category added:', category);
+        this.categoryForm.reset();
+      },
+      (error) => {
+        // Handle the error
+        console.error('Error adding category:', error);
+      }
     );
   }
 }

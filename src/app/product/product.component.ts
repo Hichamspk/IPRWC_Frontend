@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../service/product.service';
 import { ProductModel } from '../model/product.model';
 import { Category } from "./Category";
+import {CategoryService} from "../service/category-service"
 
 @Component({
   selector: 'app-product',
@@ -14,14 +15,14 @@ export class ProductComponent implements OnInit {
   categories: Category[] = [];
   selectedCategories: number[] = [];
 
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService, private categoryService: CategoryService) {}
 
   ngOnInit(): void {
     this.productService.getProducts().subscribe(data => {
       this.products = data;
       this.filteredProducts = data; // Initially show all products
     });
-    this.productService.getCategories().subscribe(data => {
+    this.categoryService.getCategories().subscribe(data => {
       this.categories = data;
     });
   }
