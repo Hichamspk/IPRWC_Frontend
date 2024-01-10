@@ -39,6 +39,13 @@ export class AdminPanelComponent implements OnInit {
     );
   }
 
+  unselectProduct(): void {
+    this.editing = false;
+    this.productForm.reset();
+    this.selectedProduct = null;
+  }
+
+
   InitializeProductForm(): void {
     this.productForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -71,13 +78,20 @@ export class AdminPanelComponent implements OnInit {
     if (this.productForm.invalid) {
       return;
     }
-    const productData = this.productForm.value;
+    let productData = this.productForm.value;
+    productData = {
+      ...productData,
+      category: { id: productData.categoryId } // Nest the category ID
+    };
+    delete productData.categoryId; // Remove the categoryId field
+
     if (this.editing) {
       this.updateProduct(productData);
     } else {
       this.addProduct(productData);
     }
   }
+
 
   addProduct(product: ProductModel): void {
     this.productService.addProduct(product).subscribe(
