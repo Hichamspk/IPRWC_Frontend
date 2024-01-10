@@ -13,6 +13,7 @@ import {CategoryService} from "../service/category-service";
 export class AdminPanelComponent implements OnInit {
   categoryForm!: FormGroup;
   products: ProductModel[] = [];
+  categories: Category[] = []; // Array to hold categories
   selectedProduct: ProductModel | null = null;
   productForm!: FormGroup;
   editing = false;
@@ -26,16 +27,25 @@ export class AdminPanelComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadProducts();
-    this.initializeForm();
+    this.loadCategories();
+    this.InitializeProductForm();
     this.initializeCategoryForm();
   }
 
-  initializeForm(): void {
+  loadCategories(): void {
+    this.categoryService.getCategories().subscribe(
+      (data) => this.categories = data,
+      (error) => console.error(error)
+    );
+  }
+
+  InitializeProductForm(): void {
     this.productForm = this.formBuilder.group({
       name: ['', Validators.required],
       description: [''],
       price: [null, Validators.required],
       imageUrl: [''],
+      categoryId: [null, Validators.required]
     });
   }
 
