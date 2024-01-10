@@ -9,6 +9,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {LoginComponent} from "./login/login.component";
 import {ProfilePageComponent} from "./profile-page/profile-page.component";
+import {AdminPanelComponent} from "./admin-panel/admin-panel.component";
 
 
 
@@ -18,6 +19,7 @@ import {ProfilePageComponent} from "./profile-page/profile-page.component";
     ProductComponent,
     NavbarComponent,
     ProfilePageComponent,
+    AdminPanelComponent,
   LoginComponent],
   imports: [
     FormsModule,

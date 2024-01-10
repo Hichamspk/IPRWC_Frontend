@@ -1,17 +1,19 @@
-<section class="bg-gray-50 dark:bg-gray-900">
-  <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+<section class="bg-gray-50 dark:bg-gray-900 pt-8 px-6">
+  <!-- Logout Button -->
+  <div class="flex justify-end w-full">
+    <button (click)="logout()" class="mb-4 text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Logout</button>
+  </div>
+
+  <div class="flex flex-col items-center justify-center mx-auto md:h-screen lg:py-0">
     <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
       <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-        <h2 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">User Profile</h2>
-        <div class="text-sm font-medium text-gray-900 dark:text-white">
-          <div><strong>Name:</strong> {{ user.name }}</div>
-          <div><strong>Email:</strong> {{ user.email }}</div>
-        </div>
-        <!-- Conditional Button for Admin -->
-        <div *ngIf="user.rights === 'ADMIN'" class="mt-4">
-          <button class="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Go to Admin Panel</button>
-        </div>
+        <!-- User Profile Content -->
       </div>
+    </div>
+
+    <!-- Conditional Button for Admin, outside the box -->
+    <div *ngIf="user.rights === 'ADMIN'" class="mt-4 w-full">
+      <button (click)="navigateToAdminPanel()" class="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Go to Admin Panel</button>
     </div>
   </div>
 </section>

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ProfilePage } from "../model/profile-page.model";
 import { ProfilePageService } from "../service/profile-page.service";
 import { HttpErrorResponse } from "@angular/common/http";
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-profile-page',
@@ -11,7 +13,7 @@ import { HttpErrorResponse } from "@angular/common/http";
 export class ProfilePageComponent implements OnInit {
   user: ProfilePage | any = []
 
-  constructor(private profilePageService: ProfilePageService) { }
+  constructor(private profilePageService: ProfilePageService, private router: Router) { }
 
   ngOnInit(): void {
     this.getCurrentUser();
@@ -29,4 +31,10 @@ export class ProfilePageComponent implements OnInit {
       }
     );
   }
+  navigateToAdminPanel(): void {
+    this.router.navigate(['/admin']); // Update the path as per your route configuration
+  }
+
+
+
 }

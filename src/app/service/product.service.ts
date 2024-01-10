@@ -20,4 +20,16 @@ export class ProductService {
   public getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(`${this.apiServerUrl}/category`);
   }
+
+  public addProduct(product: ProductModel): Observable<ProductModel> {
+    return this.http.post<ProductModel>(`${this.apiServerUrl}/products`, product);
+  }
+
+  public updateProduct(id: number, product: ProductModel): Observable<ProductModel> {
+    return this.http.put<ProductModel>(`${this.apiServerUrl}/products/${id}`, product);
+  }
+
+  public deleteProduct(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiServerUrl}/products/${id}`);
+  }
 }

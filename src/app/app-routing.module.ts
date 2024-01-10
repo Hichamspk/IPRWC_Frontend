@@ -5,13 +5,15 @@ import {NavbarComponent} from "./navbar/navbar.component";
 import {HomeComponent} from "./home/home.component";
 import {LoginComponent} from "./login/login.component";
 import {ProfilePageComponent} from "./profile-page/profile-page.component";
+import {AdminPanelComponent} from "./admin-panel/admin-panel.component";
 
 const routes: Routes = [
   { path: 'products', component: ProductComponent },
   {path: 'navbar', component: NavbarComponent},
   {path: 'home', component: HomeComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'profile', component: ProfilePageComponent}
+  {path: 'profile', component: ProfilePageComponent},
+  {path: 'admin', component: AdminPanelComponent}
 ];
 
 @NgModule({
