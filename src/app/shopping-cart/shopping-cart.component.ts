@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import {Route, Router} from "@angular/router";
 import {ProfilePageService} from "../service/profile-page.service";
 import {CartItem} from "../model/CartItem";
+import {ShopOrderService} from "../service/shop-order.service";
 
 @Component({
   selector: 'app-shopping-cart',
@@ -17,7 +18,8 @@ export class ShoppingCartComponent implements OnInit {
   constructor(private cartService: ShoppingCartService,
               private location: Location,
               private router: Router,
-              private profilePageService: ProfilePageService
+              private profilePageService: ProfilePageService,
+              private shopOrderService: ShopOrderService
   ) {}
 
   ngOnInit(): void {
@@ -42,6 +44,10 @@ export class ShoppingCartComponent implements OnInit {
 
   updateItemQuantity(productId: number, quantity: number): void {
     this.cartService.updateQuantity(productId, quantity);
+  }
+
+  onCheckOut(){
+    this.shopOrderService.placeOrder(this.cartService.getTotalPrice(), this.cartItems);
   }
 
 }
