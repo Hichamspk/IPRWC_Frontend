@@ -4,6 +4,7 @@ import { ProductService } from '../service/product.service';
 import { ProductModel } from '../model/product.model';
 import {Category} from "../model/Category";
 import {CategoryService} from "../service/category-service";
+import {log} from "@angular-devkit/build-angular/src/builders/ssr-dev-server";
 
 @Component({
   selector: 'app-admin-panel',
@@ -13,10 +14,13 @@ import {CategoryService} from "../service/category-service";
 export class AdminPanelComponent implements OnInit {
   categoryForm!: FormGroup;
   products: ProductModel[] = [];
-  categories: Category[] = []; // Array to hold categories
+  categories: Category[] = [];
   selectedProduct: ProductModel | null = null;
   productForm!: FormGroup;
   editing = false;
+  selectedCategory: Category | null = null;
+  categoryEditing = false;
+
 
   constructor(
     private productService: ProductService,
@@ -70,27 +74,27 @@ export class AdminPanelComponent implements OnInit {
   }
 
   selectProduct(product: ProductModel): void {
-    this.editing = true;
+    this.selectedProduct = product;
     this.productForm.patchValue(product);
+    this.editing = true;
   }
 
   onSubmit(): void {
     if (this.productForm.invalid) {
       return;
     }
-    let productData = this.productForm.value;
-    productData = {
-      ...productData,
-      category: { id: productData.categoryId } // Nest the category ID
+    const formData = this.productForm.value;
+    const productData: ProductModel = {
+      ...formData,
+      category: { id: formData.categoryId }
     };
-    delete productData.categoryId; // Remove the categoryId field
-
     if (this.editing) {
       this.updateProduct(productData);
     } else {
       this.addProduct(productData);
     }
   }
+
 
 
   addProduct(product: ProductModel): void {
@@ -103,19 +107,18 @@ export class AdminPanelComponent implements OnInit {
     );
   }
 
-  updateProduct(product: ProductModel): void {
-    const productId = this.selectedProduct?.id;
-    if (!productId) {
-      return;
+  updateProduct(productData: ProductModel): void {
+    if (this.selectedProduct && this.selectedProduct.id) {
+      this.productService.updateProduct(this.selectedProduct.id, productData).subscribe(
+          () => {
+            this.loadProducts();
+            this.productForm.reset();
+            this.selectedProduct = null;
+            this.editing = false;
+          },
+          error => console.error(error)
+      );
     }
-    this.productService.updateProduct(productId, product).subscribe(
-      () => {
-        this.loadProducts();
-        this.productForm.reset();
-        this.editing = false;
-      },
-      (error) => console.error(error)
-    );
   }
 
   deleteProduct(id: number): void {
@@ -131,15 +134,50 @@ export class AdminPanelComponent implements OnInit {
     }
     const newCategory: Category = this.categoryForm.value;
     this.categoryService.addCategory(newCategory).subscribe(
-      (category) => {
-        // Handle the response, e.g., refresh the list of categories or show a success message
-        console.log('Category added:', category);
-        this.categoryForm.reset();
-      },
-      (error) => {
-        // Handle the error
-        console.error('Error adding category:', error);
-      }
+        (category) => {
+          console.log('Category added:', category);
+          this.loadCategories(); // Refresh the category list
+          this.categoryForm.reset();
+        },
+        (error) => {
+          console.error('Error adding category:', error);
+        }
     );
   }
+
+  selectCategoryForEdit(category: Category): void {
+    this.selectedCategory = category;
+    this.categoryForm.patchValue(category);
+    this.categoryEditing = true;
+  }
+
+  saveCategory(): void {
+    if (this.categoryForm.invalid) {
+      return;
+    }
+    const categoryData = this.categoryForm.value;
+    if (this.selectedCategory && this.selectedCategory.id) {
+      this.categoryService.updateCategory(this.selectedCategory.id, categoryData).subscribe(
+          () => {
+            this.loadCategories(); // Refresh the category list
+            this.categoryForm.reset();
+            this.selectedCategory = null;
+            this.categoryEditing = false;
+          },
+          (error) => {
+            console.error(error);
+          }
+      );
+    } else {
+      // Add new category...
+    }
+  }
+
+
+  deleteCategory(id: number): void {
+    this.categoryService.deleteCategory(id).subscribe(
+        // handle response...
+    );
+  }
+
 }

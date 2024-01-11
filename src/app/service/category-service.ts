@@ -19,5 +19,12 @@ public getCategories(): Observable<Category[]> {
   public addCategory(category: Category): Observable<Category> {
     return this.http.post<Category>(`${this.apiServerUrl}/category`, category);
   }
+  public updateCategory(id: number, category: Category): Observable<Category> {
+    return this.http.put<Category>(`${this.apiServerUrl}/category/${id}`, category);
+  }
+
+  public deleteCategory(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiServerUrl}/category/${id}`);
+  }
 }
 

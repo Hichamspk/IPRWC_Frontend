@@ -42,8 +42,8 @@ export class ProductComponent implements OnInit {
 
   applyFilter(): void {
     this.filteredProducts = this.selectedCategories.length > 0
-      ? this.products.filter(product => this.selectedCategories.includes(product.category.id))
-      : this.products;
+        ? this.products.filter(product => product.category && this.selectedCategories.includes(product.category.id))
+        : this.products;
   }
 
   addToCart(product: ProductModel): void {
