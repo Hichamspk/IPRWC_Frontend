@@ -21,24 +21,24 @@ export class RegisterComponent implements OnInit {
     this.form = this.formBuilder.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]]
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      postalcode: ['',],
+      city: [''],
+      street: ['']
     });
   }
 
   onSubmit(): void {
     if (this.form.valid) {
-      const { name, email, password } = this.form.value;
-      this.registerService.register(name, email, password).subscribe(
+      const { name, email, password, street, city, postalcode } = this.form.value;
+      this.registerService.register(name, email, password, street, city, postalcode).subscribe(
         response => {
           if (response && response.status === 201) {
-            // Registration successful, you can redirect the user to the login page or perform other actions
             this.router.navigate(['/login']).then(() => {
-              // Navigation successful
             }).catch(err => {
               console.error('Navigation error:', err);
             });
           } else {
-            // Handle unsuccessful registration
           }
         },
         error => {
@@ -48,7 +48,6 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  // Helper function to check if a form control has errors
   hasError(controlName: string, errorName: string): boolean {
     return this.form.get(controlName)?.hasError(errorName) || false;
   }
