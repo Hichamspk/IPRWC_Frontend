@@ -35,6 +35,14 @@ export class ProfilePageComponent implements OnInit {
     this.router.navigate(['/admin']); // Update the path as per your route configuration
   }
 
+  logout(): void {
+    // Clear the user information (you may have to adjust this based on your implementation)
+    this.user = null;
 
+    // Clear the user-related data from local storage (e.g., user ID)
+    localStorage.removeItem('id');
 
+    // Redirect to the login page or any other desired destination
+    this.router.navigate(['/login']); // Update the path as per your route configuration
+  }
 }

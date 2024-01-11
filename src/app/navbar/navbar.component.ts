@@ -22,7 +22,6 @@ export class NavbarComponent {
       { title: 'Home', path: '/home', icon: this.faHome },
       { title: 'Profile', path: '/login', icon: this.faUser },
       { title: 'Products', path: '/products', icon: this.faList },
-      { title: 'About', path: '/about', icon: this.faInfoCircle }
     ];
 
     this.updateResponsiveState();

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from '../service/login-service';
 import { Router } from '@angular/router';
 
@@ -28,8 +28,8 @@ export class LoginComponent implements OnInit {
     }
 
     this.form = this.formBuilder.group({
-      email: '',
-      password: ''
+      email: ['', [Validators.required, Validators.email]], // Add email validation
+      password: ['', Validators.required]
     });
   }
 
@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
         if (response && response.status === 200) {
           const id = response.body.id;
           localStorage.setItem('id', id.toString());
-          this.router.navigate(['/home']).then(() => {
+          this.router.navigate(['/profile']).then(() => {
             // Navigation successful
           }).catch(err => {
             // Handle navigation error
@@ -54,5 +54,8 @@ export class LoginComponent implements OnInit {
         console.error('Error during login:', error);
       }
     );
+  }
+  hasError(controlName: string, errorName: string): boolean {
+    return this.form.get(controlName)?.hasError(errorName) || false;
   }
 }

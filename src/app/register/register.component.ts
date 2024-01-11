@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {RegisterService} from "./register-service";
+import { RegisterService } from "../service/register-service";
 import { Router } from '@angular/router';
 
 @Component({
@@ -46,5 +46,10 @@ export class RegisterComponent implements OnInit {
         }
       );
     }
+  }
+
+  // Helper function to check if a form control has errors
+  hasError(controlName: string, errorName: string): boolean {
+    return this.form.get(controlName)?.hasError(errorName) || false;
   }
 }
