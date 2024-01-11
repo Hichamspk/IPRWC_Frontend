@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { faShoppingCart, faHome, faUser, faList, faInfoCircle, faBars } from '@fortawesome/free-solid-svg-icons';
+import {ShoppingCartService} from "../service/shopping-cart.service";
 
 @Component({
   selector: 'app-navbar',
@@ -16,10 +17,11 @@ export class NavbarComponent {
   faList = faList;
   faInfoCircle = faInfoCircle;
   faBars = faBars;
+  totalQuantity: number = 0;
 
-  constructor() {
+
+  constructor(private shoppingCartService: ShoppingCartService) {
     this.links = [
-      { title: 'Home', path: '/home', icon: this.faHome },
       { title: 'Profile', path: '/login', icon: this.faUser },
       { title: 'Products', path: '/products', icon: this.faList },
     ];
@@ -34,5 +36,10 @@ export class NavbarComponent {
 
   toggleMenu() {
     this.menuOpen = !this.menuOpen;
+  }
+  ngOnInit(): void {
+    this.shoppingCartService.items$.subscribe(items => {
+      this.totalQuantity = items.reduce((total, item) => total + item.quantity, 0);
+    });
   }
 }

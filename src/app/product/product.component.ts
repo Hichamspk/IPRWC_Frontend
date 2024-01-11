@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../service/product.service';
 import { ProductModel } from '../model/product.model';
-import { Category } from "./Category";
+import { Category } from "../model/Category";
 import {CategoryService} from "../service/category-service"
+import {ShoppingCartService} from "../service/shopping-cart.service";
 
 @Component({
   selector: 'app-product',
@@ -15,7 +16,7 @@ export class ProductComponent implements OnInit {
   categories: Category[] = [];
   selectedCategories: number[] = [];
 
-  constructor(private productService: ProductService, private categoryService: CategoryService) {}
+  constructor(private productService: ProductService, private categoryService: CategoryService, private shoppingCartService: ShoppingCartService) {}
 
   ngOnInit(): void {
     this.productService.getProducts().subscribe(data => {
@@ -40,11 +41,12 @@ export class ProductComponent implements OnInit {
   }
 
   applyFilter(): void {
-    if (this.selectedCategories.length > 0) {
-      this.filteredProducts = this.products.filter(product =>
-        this.selectedCategories.includes(product.category.id));
-    } else {
-      this.filteredProducts = this.products;
-    }
+    this.filteredProducts = this.selectedCategories.length > 0
+      ? this.products.filter(product => this.selectedCategories.includes(product.category.id))
+      : this.products;
+  }
+
+  addToCart(product: ProductModel): void {
+    this.shoppingCartService.addToCart(product);
   }
 }

@@ -11,6 +11,7 @@ import {LoginComponent} from "./login/login.component";
 import {ProfilePageComponent} from "./profile-page/profile-page.component";
 import {AdminPanelComponent} from "./admin-panel/admin-panel.component";
 import {RegisterComponent} from "./register/register.component";
+import {ShoppingCartComponent} from "./shopping-cart/shopping-cart.component";
 
 
 
@@ -22,7 +23,8 @@ import {RegisterComponent} from "./register/register.component";
     ProfilePageComponent,
     AdminPanelComponent,
     RegisterComponent,
-  LoginComponent],
+    LoginComponent,
+    ShoppingCartComponent],
   imports: [
     FormsModule,
     ReactiveFormsModule,

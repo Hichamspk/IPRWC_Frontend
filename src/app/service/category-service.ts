@@ -1,5 +1,5 @@
 import {Observable} from "rxjs";
-import {Category} from "../product/Category";
+import {Category} from "../model/Category";
 import {Injectable} from "@angular/core";
 import {environment} from "../environment/environment";
 import {HttpClient} from "@angular/common/http";

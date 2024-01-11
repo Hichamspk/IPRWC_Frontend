@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProductService } from '../service/product.service';
 import { ProductModel } from '../model/product.model';
-import {Category} from "../product/Category";
+import {Category} from "../model/Category";
 import {CategoryService} from "../service/category-service";
 
 @Component({
