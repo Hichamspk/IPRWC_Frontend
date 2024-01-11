@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { faShoppingCart, faHome, faSignInAlt, faList, faInfoCircle, faBars } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingCart, faHome, faUser, faList, faInfoCircle, faBars } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-navbar',
@@ -12,7 +12,7 @@ export class NavbarComponent {
   menuOpen = false;
   faShoppingCart = faShoppingCart;
   faHome = faHome;
-  faSignInAlt = faSignInAlt;
+  faUser = faUser;
   faList = faList;
   faInfoCircle = faInfoCircle;
   faBars = faBars;
@@ -20,7 +20,7 @@ export class NavbarComponent {
   constructor() {
     this.links = [
       { title: 'Home', path: '/home', icon: this.faHome },
-      { title: 'Login', path: '/login', icon: this.faSignInAlt },
+      { title: 'Profile', path: '/login', icon: this.faUser },
       { title: 'Products', path: '/products', icon: this.faList },
       { title: 'About', path: '/about', icon: this.faInfoCircle }
     ];
