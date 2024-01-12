@@ -1,4 +1,3 @@
-// shopping-cart.service.ts
 import { Injectable } from '@angular/core';
 import { CartItem } from "../model/CartItem";
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -55,5 +54,8 @@ export class ShoppingCartService {
     return items.reduce((total, item) => total + item.product.price * item.quantity, 0);
   }
 
-  // Implement other methods like removeFromCart, updateQuantity, and make sure to call saveCartItems after any changes
+  clearCart(): void {
+    this.itemsSubject.next([]);
+    localStorage.removeItem('cartItems');
+  }
 }

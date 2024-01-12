@@ -18,10 +18,8 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // Check if user ID is present in localStorage
     if (localStorage.getItem('id')) {
       this.router.navigate(['/profile']).then(() => {
-        // Redirected successfully
       }).catch(err => {
         console.error('Redirection error:', err);
       });
@@ -41,13 +39,10 @@ export class LoginComponent implements OnInit {
           const id = response.body.id;
           localStorage.setItem('id', id.toString());
           this.router.navigate(['/profile']).then(() => {
-            // Navigation successful
           }).catch(err => {
-            // Handle navigation error
             console.error('Navigation error:', err);
           });
         } else {
-          // Handle unsuccessful login
         }
       },
       error => {
