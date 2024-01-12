@@ -40,7 +40,7 @@ export class ShopOrderService {
                         );
                     }
                     this.shoppingCartService.clearCart();
-                    alert("Order has been successfully placed!"); // Or use a more sophisticated notification mechanism
+                    alert("Order has been successfully placed!");
                 }
             });
         });

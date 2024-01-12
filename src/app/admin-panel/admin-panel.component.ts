@@ -135,7 +135,7 @@ export class AdminPanelComponent implements OnInit {
     const newCategory: Category = this.categoryForm.value;
     this.categoryService.addCategory(newCategory).subscribe(
         (category) => {
-          this.loadCategories(); // Refresh the category list
+          this.loadCategories();
           this.categoryForm.reset();
         },
         (error) => {
@@ -158,7 +158,7 @@ export class AdminPanelComponent implements OnInit {
     if (this.selectedCategory && this.selectedCategory.id) {
       this.categoryService.updateCategory(this.selectedCategory.id, categoryData).subscribe(
           () => {
-            this.loadCategories(); // Refresh the category list
+            this.loadCategories();
             this.categoryForm.reset();
             this.selectedCategory = null;
             this.categoryEditing = false;
