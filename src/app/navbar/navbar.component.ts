@@ -31,7 +31,7 @@ export class NavbarComponent {
   }
 
   updateResponsiveState() {
-    this.isResponsive = window.innerWidth < 1024; // Tailwind's 'lg' breakpoint
+    this.isResponsive = window.innerWidth < 1024;
   }
 
   toggleMenu() {

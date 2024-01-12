@@ -38,7 +38,6 @@ export class ProfilePageComponent implements OnInit {
       this.profilePageService.getUserOrders(this.user.email).subscribe(
           response => {
             if (response.code === 'OK') {
-              console.log('Fetched orders:', response.payload);
               this.orders = response.payload;
             } else {
               console.error('Error response code:', response.code);
@@ -49,7 +48,6 @@ export class ProfilePageComponent implements OnInit {
           }
       );
     } else {
-      console.log('User email not found');
     }
   }
 

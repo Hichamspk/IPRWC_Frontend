@@ -36,11 +36,9 @@ export class ShopOrderService {
                     for (const cartItem of cartItems) {
                         this.placeNewOrderItem(order.id, cartItem.product.id, cartItem.quantity, cartItem.product.price * cartItem.quantity).subscribe(
                             itemResponse => {
-                                console.log(itemResponse);
                             }
                         );
                     }
-                    // Clear the cart and show a success message after placing the order
                     this.shoppingCartService.clearCart();
                     alert("Order has been successfully placed!"); // Or use a more sophisticated notification mechanism
                 }

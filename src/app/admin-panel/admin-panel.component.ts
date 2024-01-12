@@ -135,7 +135,6 @@ export class AdminPanelComponent implements OnInit {
     const newCategory: Category = this.categoryForm.value;
     this.categoryService.addCategory(newCategory).subscribe(
         (category) => {
-          console.log('Category added:', category);
           this.loadCategories(); // Refresh the category list
           this.categoryForm.reset();
         },
@@ -169,7 +168,6 @@ export class AdminPanelComponent implements OnInit {
           }
       );
     } else {
-      // Add new category...
     }
   }
 
