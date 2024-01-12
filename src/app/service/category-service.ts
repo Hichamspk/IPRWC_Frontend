@@ -17,14 +17,10 @@ public getCategories(): Observable<Category[]> {
 }
 
   public addCategory(category: Category): Observable<Category> {
-    return this.http.post<Category>(`${this.apiServerUrl}/category`, category);
+    return this.http.post<Category>(`${this.apiServerUrl}/category`, category,  { withCredentials: true });
   }
   public updateCategory(id: number, category: Category): Observable<Category> {
-    return this.http.put<Category>(`${this.apiServerUrl}/category/${id}`, category);
-  }
-
-  public deleteCategory(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiServerUrl}/category/${id}`);
+    return this.http.put<Category>(`${this.apiServerUrl}/category/${id}`, category, { withCredentials: true });
   }
 }
 

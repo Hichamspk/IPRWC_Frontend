@@ -21,11 +21,11 @@ export class ProfilePageService {
 
   getUserById(): Observable<User> {
     const id = localStorage.getItem('id');
-    return this.http.get<User>(`${this.apiServerUrl}/user/${id}`);
+    return this.http.get<User>(`${this.apiServerUrl}/user/${id}`, { withCredentials: true });
   }
 
   public getUserOrders(userName: string): Observable<ApiResponse<ShopOrder[]>> {
-    return this.http.get<ApiResponse<ShopOrder[]>>(`${this.apiServerUrl}/orders/user/${userName}`);
+    return this.http.get<ApiResponse<ShopOrder[]>>(`${this.apiServerUrl}/orders/user/${userName}`, { withCredentials: true });
   }
 
 

@@ -18,14 +18,14 @@ export class ProductService {
   }
 
   public addProduct(product: ProductModel): Observable<ProductModel> {
-    return this.http.post<ProductModel>(`${this.apiServerUrl}/products`, product);
+    return this.http.post<ProductModel>(`${this.apiServerUrl}/products`, product, { withCredentials: true });
   }
 
   public updateProduct(id: number, product: ProductModel): Observable<ProductModel> {
-    return this.http.put<ProductModel>(`${this.apiServerUrl}/products/${id}`, product);
+    return this.http.put<ProductModel>(`${this.apiServerUrl}/products/${id}`, product, { withCredentials: true });
   }
 
   public deleteProduct(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiServerUrl}/products/${id}`);
+    return this.http.delete<void>(`${this.apiServerUrl}/products/${id}`, { withCredentials: true });
   }
 }

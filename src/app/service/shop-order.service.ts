@@ -30,7 +30,7 @@ export class ShopOrderService {
                 totalAmount: total
             };
 
-            this.httpClient.post<ApiResponse<ShopOrder>>(this.apiServerUrl + "/orders/new-order", orderData).subscribe(response => {
+            this.httpClient.post<ApiResponse<ShopOrder>>(this.apiServerUrl + "/orders/new-order", orderData, {withCredentials: true}).subscribe(response => {
                 const order = response.payload;
                 if (order && order.id) {
                     for (const cartItem of cartItems) {
@@ -49,11 +49,21 @@ export class ShopOrderService {
     }
 
     placeNewOrderItem(shopOrderId: number, productId: number, quantity: number, subtotal: number) {
-        return this.httpClient.post<OrderItem>(this.apiServerUrl + "/order-items/new-order-item", {
+        const orderItemData = {
             shopOrder: {id: shopOrderId},
             productId: productId,
             quantity: quantity,
             subTotal: subtotal,
-        });
+        };
+
+        const httpOptions = {
+            withCredentials: true
+        };
+
+        return this.httpClient.post<OrderItem>(
+            this.apiServerUrl + "/order-items/new-order-item",
+            orderItemData,
+            httpOptions
+        );
     }
 }

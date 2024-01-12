@@ -173,11 +173,4 @@ export class AdminPanelComponent implements OnInit {
     }
   }
 
-
-  deleteCategory(id: number): void {
-    this.categoryService.deleteCategory(id).subscribe(
-        // handle response...
-    );
-  }
-
 }
